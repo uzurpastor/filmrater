@@ -4,7 +4,9 @@ class CreateRates < ActiveRecord::Migration[7.0]
       t.integer :user_id, null: false
       t.integer :film_id, null: false
       t.integer :rate,    null: false
+
       t.timestamps
     end
+      add_index :rates, %i[user_id film_id], unique: true 
   end
 end

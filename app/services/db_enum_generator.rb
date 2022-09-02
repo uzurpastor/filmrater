@@ -1,4 +1,4 @@
-class DBEnumGenerator
+class DbEnumGenerator
   def self.from(*args)
     new(*args).from
   end

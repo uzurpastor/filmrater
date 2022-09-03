@@ -16,6 +16,6 @@ class Film < ApplicationRecord
   def avarage_rate
     count = self.rates.count
     sum   = self.rates.pluck(:rate).reduce(:+)
-    sum/count.to_f
+    (sum/count.to_f).floor(1)
   end
 end

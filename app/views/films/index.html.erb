@@ -4,11 +4,11 @@
 <%= link_to 'add new film', new_film_path %>
 <!-- end -->
 
-<% @films.select(:id, :title, :description, :category).each do |f| %>
+<% @films.each_with_index do |f, i| %>
   <p>
     <%= f.inspect %> 
     <br>
-    <%= f.avarage_rate %> 
+    <%= @rates[i] %> x
     <%= link_to 'show', film_path(f) %>
   </p>
 <% end %>

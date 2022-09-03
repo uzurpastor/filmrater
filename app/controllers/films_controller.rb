@@ -7,6 +7,7 @@ class FilmsController < ApplicationController
   end
 
   def index
+    render 'films/index'
   end
 
   # ability for admin
@@ -25,7 +26,9 @@ class FilmsController < ApplicationController
   def update
   end
 
-  def destroy
+  def destroy 
+    debugger
+    redirect_to films_path
   end
   # end
 
@@ -36,6 +39,9 @@ class FilmsController < ApplicationController
   end
 
   def set_films
-    @films = Film.all    
+    @films = Film.all.select(:id, :title, :description, :category).includes(:rates)
+    @rates = @films.map do |film|
+      AvarageRateCalc.call(film)
+    end
   end
 end

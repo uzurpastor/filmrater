@@ -28,7 +28,13 @@ class FilmsController < ApplicationController
 
   def destroy 
     debugger
-    redirect_to films_path
+    if @film.destroy
+      redirect_to films_path,
+        flash: { success: "Film \"#{@film.title}\" successfuly deleted" }
+    else
+      redirect_to film_path,
+        flash: { danger: 'unknow problem' }
+    end
   end
   # end
 

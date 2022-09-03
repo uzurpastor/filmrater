@@ -1,2 +1,15 @@
 <h1>Films#index</h1>
-<p>Find me in app/views/films/index.html.erb</p>
+
+<!-- ability for admin -->
+<%= link_to 'add new film', new_film_path %>
+<!-- end -->
+
+<% @films.select(:id, :title, :description, :category).each do |f| %>
+  <p>
+    <%= f.inspect %> 
+    <br>
+    <%= f.avarage_rate %> 
+    <%= link_to 'show', film_path(f) %>
+  </p>
+<% end %>
+  

@@ -13,9 +13,4 @@ class Film < ApplicationRecord
 
   enum category: DbEnumGenerator.from('Animated Fantasy Gangster Science-Fiction Western Sports Mystery Drama Epic')
 
-  def avarage_rate
-    count = self.rates.count
-    sum   = self.rates.pluck(:rate).reduce(:+)
-    (sum/count.to_f).floor(1)
-  end
 end

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'rates/create'
+  resources :rates, only: :create
 
   devise_for :users
 end

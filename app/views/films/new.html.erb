@@ -1,4 +1,27 @@
 <!-- ability for admin -->
 
 <h1>Films#new</h1>
-<p>Find me in app/views/films/new.html.erb</p>
+
+<%= form_for @film do |f| %>
+  <%= render 'shared/error_messages', resource: @film %>
+  
+  <div class="field">
+    <%= f.label :title, "Title" %>
+    <%= f.text_field :title, maxlength: 30 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description, "Description" %>
+    <%= f.text_area :description, size: '50x10' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :category, "Category" %>
+    <%= f.select :category, 
+          options_for_select(Film.categories.values), 
+          include_blank: true, 
+          default: ''
+    %>
+  </div>
+  <%= f.submit 'Create new film' %>
+<% end %>

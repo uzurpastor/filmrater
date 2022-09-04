@@ -12,10 +12,18 @@ class FilmsController < ApplicationController
 
   # ability for admin
   def new
+    @film = Film.new
     render 'films/new'
   end
 
   def create
+    @film = Film.new(film_create_params)
+    if @film.save
+      redirect_to films_path,
+        flash: { success: "Film \"#{@film.title}\" created" }
+    else
+      render 'new', status: :unprocessable_entity
+    end
   end
 
 
@@ -27,7 +35,6 @@ class FilmsController < ApplicationController
   end
 
   def destroy 
-    debugger
     if @film.destroy
       redirect_to films_path,
         flash: { success: "Film \"#{@film.title}\" successfuly deleted" }
@@ -49,5 +56,9 @@ class FilmsController < ApplicationController
     @rates = @films.map do |film|
       AvarageRateCalc.call(film)
     end
+  end
+
+  def film_create_params
+    params.require(:film).permit(:title, :description, :category)
   end
 end

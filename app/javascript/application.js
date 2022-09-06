@@ -2,7 +2,3 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "jquery"
-
-$('.createRateAction').click(function (e) {
-  alert('dd');
-});

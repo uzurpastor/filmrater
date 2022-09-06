@@ -1,0 +1,10 @@
+<div style="<%= 'color:#0f0' if current_user.rated?(film) %>" >
+  <%= film.inspect %> 
+  <br>
+  <%= rate %>
+  <% unless current_user.rated?(film) %>
+    <%= render 'rates/new', film: film %>
+  <% end %>
+
+  <%= link_to 'show', film_path(film) %>
+</div>  

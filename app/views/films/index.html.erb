@@ -4,14 +4,6 @@
 <%= link_to 'add new film', new_film_path %>
 <!-- end -->
 
-<% @films.each_with_index do |film| %>
-  <div style="<%= 'color:#0f0' if @rated_film_ids.include?(film.id) %>" >
-    <%= film.inspect %> 
-    <br>
-    <%= @rates[:"#{film.id}"] %>
-    <%= render 'rates/new', film_id: film.id %>
-    
-    <%= link_to 'show', film_path(film) %>
-  </div>  
+<% @films.each do |film| %>
+  <%= render 'films/film', film: film, rate: @rates[:"#{film.id}"]%>
 <% end %>
-  

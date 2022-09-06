@@ -3,4 +3,8 @@ class User < ApplicationRecord
   
   has_many :rates  
   has_many :films, through: :rates
+
+  def rated?(film)
+    self.film_ids.include?(film.id)    
+  end
 end

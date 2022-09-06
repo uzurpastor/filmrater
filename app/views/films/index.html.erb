@@ -4,12 +4,12 @@
 <%= link_to 'add new film', new_film_path %>
 <!-- end -->
 
-<% @films.each_with_index do |f, i| %>
-  <p>
-    <%= f.inspect %> 
+<% @films.each_with_index do |film, i| %>
+  <div style="<%= 'color:#0f0' if @rated_film_ids.include?(i) %>" >
+    <%= film.inspect %> 
     <br>
-    <%= @rates[i] %> x
-    <%= link_to 'show', film_path(f) %>
-  </p>
+    <%= @rates[i] %> | <%= render 'rates/new', film_id: film.id %>
+    <%= link_to 'show', film_path(film) %>
+  </div>  
 <% end %>
   

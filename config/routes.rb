@@ -5,7 +5,8 @@ Rails.application.routes.draw do
       to: 'films#destroy', 
       as: 'destroy_film'
 
-  resources :rates, only: :create
-
+  post 'rates', 
+      to: 'rates#create',
+      as: 'create_rate'
   devise_for :users
 end

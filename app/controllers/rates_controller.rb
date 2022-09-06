@@ -2,14 +2,13 @@ class RatesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    debugger
-    @rate = current_user.rates.new(rates_create_params)
-    if @rate.save
-      head :created
+    rate = current_user.rates.new(rates_create_params)
+    if rate.save
+      # temporary 
+      redirect_to films_path
     else
-      head :bad_request
+      redirect_to films_path
     end
-    render
   end
 
   private

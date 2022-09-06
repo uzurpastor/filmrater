@@ -56,6 +56,9 @@ class FilmsController < ApplicationController
     @rates = @films.map do |film|
       AvarageRateCalc.call(film)
     end
+    if current_user
+      @rated_film_ids = current_user.film_ids
+    end
   end
 
   def film_create_params

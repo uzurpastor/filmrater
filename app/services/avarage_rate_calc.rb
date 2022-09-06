@@ -21,7 +21,8 @@ class AvarageRateCalc
   end
 
   def calc_avarage
-    (@sum/@count.to_f).floor(1)
+    av = (@sum/@count.to_f).floor(1)
+    { "#{@film.id}": av }
   end
 
   def find_count_of_rates

@@ -53,12 +53,16 @@ class FilmsController < ApplicationController
 
   def set_films
     @films = Film.all.select(:id, :title, :description, :category).includes(:rates)
-    @rates = @films.map do |film|
-      AvarageRateCalc.call(film)
-    end
+    @rates = collect_rates
     if current_user
       @rated_film_ids = current_user.film_ids
     end
+  end
+
+  def collect_rates
+    @films.map do |film|
+      AvarageRateCalc.call(film)
+    end.reduce Hash.new, :merge
   end
 
   def film_create_params

@@ -3,15 +3,25 @@ class RatesController < ApplicationController
 
   def create
     rate = current_user.rates.new(rates_create_params)
+    @film = current_film
     if rate.save
-      # temporary 
-      redirect_to films_path
+      respond_to do |format| 
+        format.html {redirect_to films_path}
+        format.js
+      end
     else
-      redirect_to films_path
+      respond_to do |format| 
+        format.html {redirect_to films_path}
+        format.js 
+      end
     end
   end
 
   private
+
+  def current_film
+    Film.find(params[:rate][:film_id])
+  end
 
   def rates_create_params
     params.require(:rate).permit(:film_id, :rate)    

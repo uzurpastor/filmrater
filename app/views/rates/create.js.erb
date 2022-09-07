@@ -1,0 +1,1 @@
+$('#film-<%= @film.id %>').html('<%=j render 'films/film', film: @film, rate: AvarageRateCalc.call(@film) %>');

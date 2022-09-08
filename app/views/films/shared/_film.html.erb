@@ -5,7 +5,7 @@
 
   <%= render 'shared/error_messages', resource: film %>
 
-  <%= image_tag(film.poster, width: 200) if film.poster.attached? %>
+  <%= render 'films/shared/poster', film: film %>
   <%= film.inspect %> 
   <br>
   <%= rate %>  

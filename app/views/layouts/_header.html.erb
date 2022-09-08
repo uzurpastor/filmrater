@@ -1,0 +1,5 @@
+<% if current_user %>
+  <p>You are login as User: <%= current_user.email %>  
+     <%= link_to 'Logout', destroy_user_session_path, method: :delete %></p>
+<% end %>
+<%= render 'shared/flash_messages' %>

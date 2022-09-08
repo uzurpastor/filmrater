@@ -3,7 +3,8 @@
 <% if can? :manage, Film.new %>
   <%= link_to 'add new film', new_film_path %>
 <% end %>
-
-<% @films.each do |film| %>
-  <%= render 'films/film', film: film, rate: @rates[:"#{film.id}"]%>
-<% end %>
+<%= paginate @films, theme: 'bootstrap-5' %>
+  <% @films.each do |film| %>
+    <%= render 'films/film', film: film, rate: @rates[:"#{film.id}"]%>
+  <% end %>
+<%= paginate @films, theme: 'bootstrap-5' %>

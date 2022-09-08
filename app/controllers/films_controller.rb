@@ -73,7 +73,7 @@ class FilmsController < ApplicationController
   end
 
   def set_films
-    @films = Film.all.includes(:rates)
+    @films = Film.page(params[:page]).includes(:rates)
     @rates = collect_rates
     if current_user
       @rated_film_ids = current_user.film_ids

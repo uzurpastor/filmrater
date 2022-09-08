@@ -10,7 +10,7 @@ class Rate < ApplicationRecord
   belongs_to :film
 
   # Validations
-  validates_uniqueness_of :film_id, scope: :user_id
+  validates_uniqueness_of :film_id, scope: :user_id, message: 'already rated'
   validate :rate_score, on: :create
 
   private

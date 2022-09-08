@@ -6,12 +6,12 @@ class RatesController < ApplicationController
     @film = current_film
     if rate.save
       respond_to do |format| 
-        format.html {redirect_to films_path}
+        format.html {redirect_to film_path(@film)}
         format.js
       end
     else
       respond_to do |format| 
-        format.html {redirect_to films_path}
+        format.html {redirect_to film_path(@film)}
         format.js 
       end
     end

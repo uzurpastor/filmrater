@@ -5,11 +5,8 @@
   <%= render 'shared/error_messages', resource: film %>
   <%= film.inspect %> 
   <br>
-  <%= rate %>
-  <% if user_signed_in? && !current_user.rated?(film) %>
-    <%= render 'rates/new', film: film %>
-  <% end %>
-
+  <%= rate %>  
+  <%= render 'rates/new', film: film, ajax: true %>
   <%= link_to 'show', film_path(film) %>
   <br>
   <br>

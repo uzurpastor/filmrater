@@ -1,6 +1,8 @@
 <h1>Films#show</h1>
-
-<p><%= @film.inspect %></p>
+  <%= @film.inspect %>
+  <%= @rate.inspect %>
+  
+  <%= render 'rates/new', film: @film, ajax: false %>
 
 <% if can? :manage, @film %>
   <%= link_to 'edit', edit_film_path %>

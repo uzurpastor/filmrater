@@ -1,9 +1,10 @@
 class FilmsController < ApplicationController
-  before_action :set_film,  only: %i[show edit destroy]
+  before_action :set_film_and_rate,  only: %i[show edit destroy]
   before_action :set_films, only: :index
   before_action :authenticate_user!, except: [:index, :show]
 
   def show
+    @rate = AvarageRateCalc.call(@film)
     render 'films/show'
   end
 
@@ -53,8 +54,8 @@ class FilmsController < ApplicationController
 
   private
 
-  def set_film
-    @film = Film.find params[:id]    
+  def set_film_and_rate
+    @film = Film.find params[:id]
   end
 
   def set_films

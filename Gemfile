@@ -13,8 +13,10 @@ gem 'tzinfo-data', platforms: %i[ mingw mswin x64_mingw jruby ]
 gem 'bootsnap', require: false
 gem 'faker'
 gem 'jquery-rails'
+
 gem 'kaminari'
 gem 'bootstrap5-kaminari-views'
+gem 'bootstrap-sass'
 
 # Autorization
 gem 'devise'

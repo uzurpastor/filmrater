@@ -1,7 +1,8 @@
 class FilmsController < ApplicationController
   before_action :set_film,  only: %i[show edit destroy]
   before_action :set_films, only: :index
-  
+  before_action :authenticate_user!, except: [:index, :show]
+
   def show
     render 'films/show'
   end
@@ -10,13 +11,15 @@ class FilmsController < ApplicationController
     render 'films/index'
   end
 
-  # ability for admin
   def new
+    return redirect_to films_path unless safety?
     @film = Film.new
     render 'films/new'
   end
 
   def create
+    return unless safety?
+
     @film = Film.new(film_create_params)
     if @film.save
       redirect_to films_path,
@@ -28,13 +31,17 @@ class FilmsController < ApplicationController
 
 
   def edit
+    return redirect_to films_path unless safety?
     render 'films/edit'
   end
 
   def update
+    return unless safety?
   end
 
   def destroy 
+    return unless safety?
+    
     if @film.destroy
       redirect_to films_path,
         flash: { success: "Film \"#{@film.title}\" successfuly deleted" }
@@ -43,7 +50,6 @@ class FilmsController < ApplicationController
         flash: { danger: 'unknow problem' }
     end
   end
-  # end
 
   private
 

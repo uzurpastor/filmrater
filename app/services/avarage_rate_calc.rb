@@ -9,21 +9,31 @@ class AvarageRateCalc
   end
 
   def call
-    return 0.0 unless alredy_rated? 
+    return zero_value unless alredy_rated? 
     find_count_of_rates
     find_sum_of_rates
-    calc_avarage(hash: @options[:hash])
+    calc_avarage
   end
 
   private
 
+  def zero_value
+    case @options[:hash].present?
+    when false
+      0.0
+    when true
+      {"#{@film.id}": 0.0 }
+    end
+  end
+  
   def alredy_rated?
     @film.rates.size.nonzero?
   end
 
-  def calc_avarage(hash: false)
+  def calc_avarage
     av = (@sum/@count.to_f).floor(1)
-    case hash.present?
+
+    case @options[:hash].present?
     when false
       av
     when true

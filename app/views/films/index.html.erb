@@ -1,8 +1,8 @@
 <h1>Films#index</h1>
 
-<!-- ability for admin -->
-<%= link_to 'add new film', new_film_path %>
-<!-- end -->
+<% if can? :manage, Film.new %>
+  <%= link_to 'add new film', new_film_path %>
+<% end %>
 
 <% @films.each do |film| %>
   <%= render 'films/film', film: film, rate: @rates[:"#{film.id}"]%>

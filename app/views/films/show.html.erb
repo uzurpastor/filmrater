@@ -2,6 +2,7 @@
 
 <p><%= @film.inspect %></p>
 
-<!-- ability for admin -->
-<%= link_to 'edit', edit_film_path %>
-<%= link_to 'destroy', destroy_film_path %>
+<% if can? :manage, @film %>
+  <%= link_to 'edit', edit_film_path %>
+  <%= link_to 'destroy', destroy_film_path %>
+<% end %>

@@ -1,12 +1,12 @@
 <div class='film' 
      id="film-<%= film.id %>" 
      data-film_id='<%= film.id %>' 
-     style="<%= 'color:#0f0' if current_user.present? && current_user.rated?(film) %>" >
+     style="<%= 'color:#0f0' if user_signed_in? && current_user.rated?(film) %>" >
   <%= render 'shared/error_messages', resource: film %>
   <%= film.inspect %> 
   <br>
   <%= rate %>
-  <% if current_user.present? && !current_user.rated?(film) %>
+  <% if user_signed_in? && !current_user.rated?(film) %>
     <%= render 'rates/new', film: film %>
   <% end %>
 

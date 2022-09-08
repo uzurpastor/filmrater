@@ -1,0 +1,21 @@
+<%= form_for @film do |f| %>
+  <%= render 'shared/error_messages', resource: @film %>
+  
+  <div class="field">
+    <%= f.label :title, "Title" %>
+    <%= f.text_field :title, maxlength: 30 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description, "Description" %>
+    <%= f.text_area :description, size: '50x10' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :category, "Category" %>
+    <%= f.select :category, 
+          options_for_select(Film.categories.values, @film.category || ''), 
+          include_blank: true %>
+  </div>
+  <%= f.submit 'Submit' %>
+<% end %>

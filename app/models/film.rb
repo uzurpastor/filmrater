@@ -8,8 +8,8 @@ class Film < ApplicationRecord
   has_many :rates
 
   # Validations
-  validates_presence_of :title, :description, on: :create
-  validates_presence_of :category, on: :create, message: 'Film should have category'
+  validates_presence_of :title, :description
+  validates_presence_of :category, message: 'Film should have category'
 
   enum category: DbEnumGenerator.from('Animated Fantasy Gangster Science-Fiction Western Sports Mystery Drama Epic')
 

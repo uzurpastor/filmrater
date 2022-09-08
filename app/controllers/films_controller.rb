@@ -52,7 +52,7 @@ class FilmsController < ApplicationController
   end
 
   def set_films
-    @films = Film.all.select(:id, :title, :description, :category).includes(:rates)
+    @films = Film.all.includes(:rates)
     @rates = collect_rates
     if current_user
       @rated_film_ids = current_user.film_ids
@@ -61,7 +61,7 @@ class FilmsController < ApplicationController
 
   def collect_rates
     @films.map do |film|
-      AvarageRateCalc.call(film)
+      AvarageRateCalc.call(film, hash: true)
     end.reduce Hash.new, :merge
   end
 

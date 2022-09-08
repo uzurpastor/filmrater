@@ -2,6 +2,7 @@
      id="film-<%= film.id %>" 
      data-film_id='<%= film.id %>' 
      style="<%= 'color:#0f0' if current_user.present? && current_user.rated?(film) %>" >
+  <%= render 'shared/error_messages', resource: film %>
   <%= film.inspect %> 
   <br>
   <%= rate %>

@@ -2,7 +2,10 @@
      id="film-<%= film.id %>" 
      data-film_id='<%= film.id %>' 
      style="<%= 'color:#0f0' if user_signed_in? && current_user.rated?(film) %>" >
+
   <%= render 'shared/error_messages', resource: film %>
+
+  <%= image_tag(film.poster, width: 200) if film.poster.attached? %>
   <%= film.inspect %> 
   <br>
   <%= rate %>  

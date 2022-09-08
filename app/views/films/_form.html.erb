@@ -17,5 +17,9 @@
           options_for_select(Film.categories.values, @film.category || ''), 
           include_blank: true %>
   </div>
+  <div class="field">
+    <%= f.label :poster, "Poster" %>
+    <%= f.file_field :poster %>
+  </div>
   <%= f.submit 'Submit' %>
 <% end %>

@@ -87,10 +87,10 @@ class FilmsController < ApplicationController
   end
 
   def film_create_params
-    params.require(:film).permit(:title, :description, :category)
+    params.require(:film).permit(:title, :description, :category, :poster)
   end
 
   def film_update_params
-    params.require(:film).permit(:title, :description, :category)
+    params.require(:film).permit(:title, :description, :category, :poster)
   end
 end

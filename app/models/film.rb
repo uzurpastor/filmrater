@@ -6,7 +6,7 @@ t.string "category", null: false
 class Film < ApplicationRecord
   # Associations
   has_many :rates
-
+  has_one_attached :poster
   # Validations
   validates_presence_of :title, :description
   validates_presence_of :category, message: 'Film should have category'

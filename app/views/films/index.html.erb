@@ -5,6 +5,6 @@
 <% end %>
 <%= paginate @films, theme: 'bootstrap-5' %>
   <% @films.each do |film| %>
-    <%= render 'films/film', film: film, rate: @rates[:"#{film.id}"]%>
+    <%= render 'films/shared/film', film: film, rate: @rates[:"#{film.id}"]%>
   <% end %>
 <%= paginate @films, theme: 'bootstrap-5' %>

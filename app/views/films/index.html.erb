@@ -3,6 +3,12 @@
 <% if can? :manage, Film.new %>
   <%= link_to 'add new film', new_film_path %>
 <% end %>
+
+<%= form_tag films_path, method: :get do %>
+  <%= select_tag :category, options_for_select(Film.categories.values, @filtering_category), include_blank: true %>
+  <%= submit_tag 'filter' %>
+<% end %>
+
 <%= paginate @films, theme: 'bootstrap-5' %>
   <% @films.each do |film| %>
     <%= render 'films/shared/film', film: film, rate: @rates[:"#{film.id}"]%>

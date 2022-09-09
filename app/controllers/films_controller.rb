@@ -73,11 +73,21 @@ class FilmsController < ApplicationController
   end
 
   def set_films
-    @films = Film.page(params[:page]).includes(:rates, :poster_blob)
+    @films = eval <<-FILM_SELECT.delete("\n")
+                  Film
+                    #{category_condition}
+                    .page(params[:page])
+                    .includes(:rates, :poster_blob)
+                  FILM_SELECT
     @rates = collect_rates
     if current_user
       @rated_film_ids = current_user.film_ids
     end
+  end
+
+  def category_condition
+    @filtering_category = params[:category] || ''
+    '.' + params[:category] if @filtering_category.present?
   end
 
   def collect_rates

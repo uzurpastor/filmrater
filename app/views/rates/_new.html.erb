@@ -1,8 +1,9 @@
+<div data-turbo="false">
 <%= form_tag create_rate_path,
       method: :post,
-      remote: true,
-      data: {turbo: false} do %> 
+      remote: true do %> 
   <%= hidden_field_tag 'rate[film_id]', local_options.fetch(:film).id %>
   <%= number_field_tag 'rate[rate]', 10, in: 1..10 %>
   <%= submit_tag 'send', data: {turbo: false} %>
 <% end %> 
+</div>

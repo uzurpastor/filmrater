@@ -6,9 +6,10 @@ class RatesController < ApplicationController
     @rate = current_user.rates.new(rates_create_params)
     @options.merge!(film: current_film)
     @options.merge!(rate: AvarageRateCalc.call(@options[:film]))
+    saved = @rate.save
     @options.merge!(rated?: current_user.rated?(@options[:film]))
 
-    if @rate.save
+    if saved
       respond_to do |format| 
         format.html {redirect_to film_path(@options[:film])}
         format.js

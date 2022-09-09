@@ -1,15 +1,7 @@
 <% if user_signed_in? && !current_user.rated?(film) %>
-  <% if ajax.trust %>
-    <%= form_tag create_rate_path, method: :post, remote: true, data: {turbo: false} do %> 
-      <%= hidden_field_tag 'rate[film_id]', film.id %>
-      <%= number_field_tag 'rate[rate]', 10, in: 1..10 %>
-      <%= submit_tag 'send' %>
-    <% end %> 
-  <% else %>
-    <%= form_tag create_rate_path, method: :post,  data: {turbo: false} do %>  
-      <%= hidden_field_tag 'rate[film_id]', film.id %>
-      <%= number_field_tag 'rate[rate]', 10, in: 1..10 %>
-      <%= submit_tag 'send' %>
-    <% end %> 
-  <% end %>
+  <%= form_tag create_rate_path, method: :post, remote: ajax.trust, data: {turbo: false} do %> 
+    <%= hidden_field_tag 'rate[film_id]', film.id %>
+    <%= number_field_tag 'rate[rate]', 10, in: 1..10 %>
+    <%= submit_tag 'send' %>
+  <% end %> 
 <% end %>

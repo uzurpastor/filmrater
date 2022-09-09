@@ -1,6 +1,5 @@
 <%= form_for @film do |f| %>
   <%= render 'shared/error_messages', resource: @film %>
-  
   <div class="field">
     <%= f.label :title, "Title" %>
     <%= f.text_field :title, maxlength: 30 %>
@@ -21,5 +20,12 @@
     <%= f.label :poster, "Poster" %>
     <%= f.file_field :poster %>
   </div>
-  <%= f.submit 'Submit' %>
+  
+  <% case params[:action] %>
+  <% when 'new' %>
+    <%= f.submit 'Create' %>
+  <% when 'edit' %>
+    <%= f.submit 'Update' %>
+  <% end %>
+
 <% end %>

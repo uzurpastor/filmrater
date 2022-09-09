@@ -1,9 +1,9 @@
 <h1>Films#show</h1>
-  <%= render 'films/shared/poster', film: @film %>
-  <%= @film.inspect %>
-  <%= @rate.inspect %>
-  
-  <%= render 'rates/new', film: @film, ajax: false %>
+  <%= render 'films/shared/film', local_options: {
+        film:   @film,
+        rate:   @options.fetch(:rate),
+        rated?: @options.fetch(:rated?){false}
+      } %>
 
 <% if can? :manage, @film %>
   <%= link_to 'edit', edit_film_path %>

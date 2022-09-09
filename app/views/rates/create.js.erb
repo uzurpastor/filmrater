@@ -1,1 +1,2 @@
-$('#film-<%= @film.id %>').html('<%=j render 'films/shared/film', film: @film, rate: AvarageRateCalc.call(@film) %>');
+$('[data-film_id="<%= @options[:film].id %>"]')
+  .html("<%=j render 'films/shared/film', local_options: @options %>");

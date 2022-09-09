@@ -16,7 +16,7 @@ gem 'jquery-rails'
 
 gem 'kaminari'
 gem 'bootstrap5-kaminari-views'
-gem 'bootstrap-sass'
+gem 'bootstrap'
 
 # Autorization
 gem 'devise'

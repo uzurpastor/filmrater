@@ -1,16 +1,30 @@
-<div class='film' 
-     id="film-<%= film.id %>" 
-     data-film_id='<%= film.id %>' 
-     style="<%= 'color:#0f0' if user_signed_in? && current_user.rated?(film) %>" >
+<div class='film' data-film_id='<%= local_options[:film].id %>' 
+  style="<%= 'color:#0f0' if local_options[:rated?] %>" >
 
-  <%= render 'shared/error_messages', resource: film %>
+  <% if @rate.present? %>
+    <%= render('shared/error_messages', resource: @rate) %>
+  <% end %>
 
-  <%= render 'films/shared/poster', film: film %>
-  <%= film.inspect %> 
-  <br>
-  <%= rate %>  
-  <%= render 'rates/new', film: film, ajax: true %>
-  <%= link_to 'show', film_path(film) %>
-  <br>
-  <br>
+  <% if local_options.fetch(:film).poster.attached? %>
+    <%= image_tag(local_options.fetch(:film).poster, width: 200)  %>
+  <% else %>
+    <%= image_tag('no-image-available.jpg', width: 200) %>
+  <% end %>
+
+
+
+  <%= local_options.fetch(:film).inspect %> 
+  <%= local_options.fetch(:rate) %>  
+
+  <% if user_signed_in? && !local_options[:rated?] %>
+    <%= render 'rates/new', local_options: {
+          film: local_options.fetch(:film)
+        } %>
+  <% end %>
+
+
+
+  <% unless action_name == 'show' %>
+    <%= link_to 'show', film_path(local_options[:film]) %>
+  <% end %>
 </div>  

@@ -5,12 +5,22 @@
 <% end %>
 
 <%= form_tag films_path, method: :get do %>
-  <%= select_tag :category, options_for_select(Film.categories.values, @filtering_category), include_blank: true %>
+  <%= select_tag :category, 
+        options_for_select(
+          @options[:film_select_options],
+          @options[:filtering_category]), 
+        include_blank: true %>
   <%= submit_tag 'filter' %>
 <% end %>
 
 <%= paginate @films, theme: 'bootstrap-5' %>
   <% @films.each do |film| %>
-    <%= render 'films/shared/film', film: film, rate: @rates[:"#{film.id}"]%>
+    <% rated = @options[:rated_film_ids].include?(film.id) if user_signed_in? %>
+    <%= render 'films/shared/film', local_options: { 
+          film: film,
+          rate: @options[:rates][:"#{film.id}"],
+          rated?: rated
+        } %>
+
   <% end %>
 <%= paginate @films, theme: 'bootstrap-5' %>

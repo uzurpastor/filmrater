@@ -9,4 +9,5 @@ Rails.application.routes.draw do
       to: 'rates#create',
       as: 'create_rate'
   devise_for :users
+  root to: 'films#index'
 end

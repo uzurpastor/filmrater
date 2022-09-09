@@ -1,5 +1,32 @@
-<% if current_user %>
-  <p>You are login as User: <%= current_user.email %>  
-     <%= link_to 'Logout', destroy_user_session_path, method: :delete %></p>
-<% end %>
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <%= link_to 'Filmrater', root_path, class: 'navbar-brand'%>
+    </div>
+    <nav class="nav navbar-nav navbar-right">
+    </nav> 
+  </div>
+</div>
+
+
+<div class="container fixed-top bg-light">
+  <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <a href="<%= root_path %>" class="d-flex align-items-center col-md-4 text-dark text-decoration-none">
+      <span class="fs-4 text-uppercase">Filmrater</span>
+    </a>
+    <div class="col-md-8 text-end">
+      <% if user_signed_in? %>
+        <span class="disabled btn btn-primary me-2"><%= current_user.email %></span>
+        <%= link_to 'Logout', destroy_user_session_path, 
+              method: :delete, 
+              class: 'btn btn-outline-primary me-2' %>
+      <% else %>
+        <%= link_to 'Login', new_user_session_path, class: 'btn btn-outline-primary me-2' %>
+        <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </header>
+</div>
+
+
 <%= render 'shared/flash_messages' %>

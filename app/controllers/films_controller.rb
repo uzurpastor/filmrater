@@ -1,14 +1,11 @@
 class FilmsController < ApplicationController
   before_action :set_film,  only: %i[show edit update destroy]
-  before_action :init_options,  only: %i[show]
   before_action :set_films, only: :index
   before_action :authenticate_user!, except: [:index, :show]
 
   # START Read Actions
   def show
-    @options.merge!(rate:   AvarageRateCalc.call(@film))
-    @options.merge!(rated?: current_user.rated?(@film)) if user_signed_in?
-
+    init_options
     render 'films/show'
   end
 
@@ -73,6 +70,12 @@ class FilmsController < ApplicationController
 
   def init_options
     @options = {}
+    @options.merge!(rate:   AvarageRateCalc.call(@film))
+
+    rated = if user_signed_in?
+      current_user.rated?(@film)
+    end
+    @options.merge!(rated?: rated) 
   end
 
   def set_film
@@ -86,13 +89,7 @@ class FilmsController < ApplicationController
                     .page(params[:page])
                     .includes(:rates, :poster_blob)
                   FILM_SELECT
-    rates = collect_rates_for @films
-
-    rated_film_ids = if user_signed_in?
-      @films.map do |film|
-        film.id if current_user.rated?(film)
-      end.compact
-    end
+    rates = collect_rates
 
     film_select_options = Film.categories.values
 
@@ -100,7 +97,6 @@ class FilmsController < ApplicationController
 
     @options = {
       rates: rates,
-      rated_film_ids: rated_film_ids,
       film_select_options: film_select_options,
       filtering_category: filtering_category
     }
@@ -111,9 +107,15 @@ class FilmsController < ApplicationController
     '.' + params[:category].underscore if filtering_category.present?
   end
 
-  def collect_rates_for films
-    films.map do |film|
-      AvarageRateCalc.call(film, hash: true)
+  def collect_rates
+    @films.map do |film|
+      rate = AvarageRateCalc.call(film)
+
+      rated = if user_signed_in?
+        current_user.rated?(film)
+      end.present?
+
+      {"#{film.id}": {rate: rate, rated?: rated}}
     end.reduce Hash.new, :merge
   end
 

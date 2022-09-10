@@ -5,8 +5,8 @@ class RatesController < ApplicationController
   def create
     @rate = current_user.rates.new(rates_create_params)
     @options.merge!(film: current_film)
-    @options.merge!(rate: AvarageRateCalc.call(@options[:film]))
     saved = @rate.save
+    @options.merge!(rate: AvarageRateCalc.call(@options[:film]))
     @options.merge!(rated?: current_user.rated?(@options[:film]))
 
     if saved

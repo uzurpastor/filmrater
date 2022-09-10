@@ -1,8 +1,9 @@
+<% ValidOptionsChecker.call(@options, %i[rate rated?]) %>
 <h1>Films#show</h1>
   <%= render 'films/shared/film', local_options: {
         film:   @film,
-        rate:   @options.fetch(:rate),
-        rated?: @options.fetch(:rated?){false}
+        rate:   @options[:rate],
+        rated?: @options[:rated?] 
       } %>
 
 <% if can? :manage, @film %>

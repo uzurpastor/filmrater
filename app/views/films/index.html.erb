@@ -1,3 +1,5 @@
+<% ValidOptionsChecker.call(@options, %i[rates]) %>
+
 <h1>Films#index</h1>
 
 <% if can? :manage, Film.new %>
@@ -14,13 +16,13 @@
 <% end %>
 
 <%= paginate @films, theme: 'bootstrap-5' %>
-  <% @films.each do |film| %>
-    <% rated = @options[:rated_film_ids].include?(film.id) if user_signed_in? %>
-    <%= render 'films/shared/film', local_options: { 
-          film: film,
-          rate: @options[:rates][:"#{film.id}"],
-          rated?: rated
-        } %>
 
+  <% @films.each do |film| %>
+    <%= render 'films/shared/film', local_options: { 
+          film:   film,
+          rate:   @options[:rates][:"#{film.id}"][:rate],
+          rated?: @options[:rates][:"#{film.id}"][:rated?]
+        } %>
   <% end %>
+
 <%= paginate @films, theme: 'bootstrap-5' %>

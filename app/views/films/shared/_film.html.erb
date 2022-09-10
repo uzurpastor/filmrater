@@ -1,3 +1,5 @@
+<% ValidOptionsChecker.call(local_options, %i[film rate rated?]) %>
+
 <div class='film' data-film_id='<%= local_options[:film].id %>' 
   style="<%= 'color:#0f0' if local_options[:rated?] %>" >
 
@@ -5,24 +7,22 @@
     <%= render('shared/error_messages', resource: @rate) %>
   <% end %>
 
-  <% if local_options.fetch(:film).poster.attached? %>
-    <%= image_tag(local_options.fetch(:film).poster, width: 200)  %>
+  <% if local_options[:film].poster.attached? %>
+    <%= image_tag(local_options[:film].poster, width: 200)  %>
   <% else %>
     <%= image_tag('no-image-available.jpg', width: 200) %>
   <% end %>
 
 
 
-  <%= local_options.fetch(:film).inspect %> 
-  <%= local_options.fetch(:rate) %>  
+  <%= local_options[:film].inspect %> 
+  <%= local_options[:rate] %>  
 
-  <% if user_signed_in? && !local_options[:rated?] %>
+  <% unless local_options[:rated?] %>
     <%= render 'rates/new', local_options: {
-          film: local_options.fetch(:film)
+          film: local_options[:film]
         } %>
   <% end %>
-
-
 
   <% unless action_name == 'show' %>
     <%= link_to 'show', film_path(local_options[:film]) %>

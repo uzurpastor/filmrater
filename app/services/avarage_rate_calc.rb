@@ -1,4 +1,5 @@
 class AvarageRateCalc
+  FLOAT_ZERO = 0.0
   def self.call(*args)
     new(*args).call
   end
@@ -20,9 +21,9 @@ class AvarageRateCalc
   def zero_value
     case @options[:hash].present?
     when false
-      0.0
+      FLOAT_ZERO
     when true
-      {"#{@film.id}": 0.0 }
+      {"#{@film.id}": FLOAT_ZERO }
     end
   end
   

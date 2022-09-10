@@ -1,5 +1,5 @@
 module FilmHelper
-  def poster(film)
+  def poster_tag(film)
     blob_poster = if film.poster.attached?
       film.poster
     else
@@ -8,8 +8,8 @@ module FilmHelper
     image_tag(blob_poster)
   end  
 
-  def filter_tag list, active
-    options = options_for_select(list, active)
+  def filter_tag category
+    options = options_for_select(category[:list], category[:active])
 
     select_tag :category, options, 
       include_blank: true    

@@ -11,6 +11,15 @@ class Film < ApplicationRecord
   validates_presence_of :title, :description
   validates_presence_of :category, message: 'Film should have category'
 
+  # Scopes
+  scope :by_category, -> (category) do 
+    if category.blank?
+      all
+    else
+      where(category: category)
+    end
+  end
+
   enum category: DbEnumGenerator.from('Animated Fantasy Gangster Science-Fiction Western Sports Mystery Drama Epic')
 
 end

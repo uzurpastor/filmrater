@@ -1,8 +1,8 @@
 class FilmsController < ApplicationController
-  before_action :set_film,  only: %i[show edit update destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :set_film,           except: %i[index new create]
 
-  #======= Read Actions
+  #======= Read Actions =======#
   def show
     @options = OptionSetter.new(@film, current_user)
                            .options(:rate_params)
@@ -14,7 +14,7 @@ class FilmsController < ApplicationController
                            .options(%i[rate_params category])
   end
 
-  #======= Create Actions
+  #======= Create Actions =======#
   def new
     return redirect_to films_path unless safety?
 
@@ -25,7 +25,7 @@ class FilmsController < ApplicationController
   def create
     return unless safety?
 
-    @film = Film.new(film_create_params)
+    @film = Film.new(FilmsParamsPermitter.create(params))
     if @film.save
       redirect_to films_path,
         flash: { success: "Film \"#{@film.title}\" created" }
@@ -34,7 +34,7 @@ class FilmsController < ApplicationController
     end
   end
 
-  #======= Update Actions
+  #======= Update Actions =======#
   def edit
     return redirect_to films_path unless safety?
 
@@ -44,7 +44,7 @@ class FilmsController < ApplicationController
   def update
     return unless safety?
 
-    if @film.update(film_update_params)
+    if @film.update(FilmsParamsPermitter.update(params))
       redirect_to film_path(@film),
         flash: {success: "Film \"#{@film.title}\" updated"}
     else
@@ -52,7 +52,7 @@ class FilmsController < ApplicationController
     end
   end
 
-  #======= Destroy Action
+  #======= Destroy Action =======#
   def destroy 
     return unless safety?
     
@@ -69,13 +69,5 @@ class FilmsController < ApplicationController
     
     def set_film
       @film = FilmSetter.certain(params)
-    end
-
-    def film_create_params
-      params.require(:film).permit(:title, :description, :category, :poster)
-    end
-
-    def film_update_params
-      params.require(:film).permit(:title, :description, :category, :poster)
     end
 end

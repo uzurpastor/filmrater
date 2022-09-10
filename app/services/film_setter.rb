@@ -12,7 +12,13 @@ class FilmSetter
   end
 
   def certain
-    Film.find(@params[:id])
+    case @params[:controller]
+    when 'films' 
+      Film.find(@params[:id])
+    when 'rates'
+      Film.find(@params[:rate][:film_id])
+    end
+      
   end
 
   def list

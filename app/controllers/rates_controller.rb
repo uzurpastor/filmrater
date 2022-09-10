@@ -2,7 +2,9 @@ class RatesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @rate = current_user.rates.new(rates_create_params)
+    return unless safety?
+
+    @rate = current_user.rates.new(RatesParamsPermitter.create(params))
     @rate.save
 
     @options = OptionSetter.new(current_film, current_user)
@@ -17,10 +19,6 @@ class RatesController < ApplicationController
   private
 
   def current_film
-    Film.find(params[:rate][:film_id])
-  end
-
-  def rates_create_params
-    params.require(:rate).permit(:film_id, :rate)    
+    FilmSetter.certain(params)
   end
 end

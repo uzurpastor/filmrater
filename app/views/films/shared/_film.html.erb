@@ -7,13 +7,7 @@
     <%= render('shared/error_messages', resource: @rate) %>
   <% end %>
 
-  <% if local_options[:film].poster.attached? %>
-    <%= image_tag(local_options[:film].poster, width: 200)  %>
-  <% else %>
-    <%= image_tag('no-image-available.jpg', width: 200) %>
-  <% end %>
-
-
+  <%= poster_tag(local_options[:film]) %>
 
   <%= local_options[:film].inspect %> 
   <%= local_options[:rate] %>  

@@ -1,4 +1,4 @@
-<% ValidOptionsChecker.call(@options, %i[rates]) %>
+<% ValidOptionsChecker.call(@options, %i[rate_params category_list active_category]) %>
 
 <h1>Films#index</h1>
 
@@ -7,22 +7,15 @@
 <% end %>
 
 <%= form_tag films_path, method: :get do %>
-  <%= select_tag :category, 
-        options_for_select(
-          @options[:film_select_options],
-          @options[:filtering_category]), 
-        include_blank: true %>
+  <%= filter_tag @options[:category_list], 
+                 @options[:active_category] %>
   <%= submit_tag 'filter' %>
 <% end %>
 
 <%= paginate @films, theme: 'bootstrap-5' %>
 
-  <% @films.each do |film| %>
-    <%= render 'films/shared/film', local_options: { 
-          film:   film,
-          rate:   @options[:rates][:"#{film.id}"][:rate],
-          rated?: @options[:rates][:"#{film.id}"][:rated?]
-        } %>
-  <% end %>
+<% @films.each do |film| %>
+  <%= render 'films/shared/film', local_options: PartialsDataCollector.call(film, @options[:rate_params]) %>
+<% end %>
 
 <%= paginate @films, theme: 'bootstrap-5' %>

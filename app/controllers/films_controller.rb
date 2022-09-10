@@ -17,6 +17,7 @@ class FilmsController < ApplicationController
   # START Create Actions
   def new
     return redirect_to films_path unless safety?
+
     @film = Film.new
     render 'films/new'
   end
@@ -37,6 +38,7 @@ class FilmsController < ApplicationController
   # START Update Actions
   def edit
     return redirect_to films_path unless safety?
+
     render 'films/edit'
   end
 
@@ -70,12 +72,8 @@ class FilmsController < ApplicationController
 
   def init_options
     @options = {}
-    @options.merge!(rate:   AvarageRateCalc.call(@film))
 
-    rated = if user_signed_in?
-      current_user.rated?(@film)
-    end
-    @options.merge!(rated?: rated) 
+    @options.merge!(rate_params: RateParamsCollector.call(@film, current_user)) 
   end
 
   def set_film
@@ -89,34 +87,20 @@ class FilmsController < ApplicationController
                     .page(params[:page])
                     .includes(:rates, :poster_blob)
                   FILM_SELECT
-    rates = collect_rates
 
-    film_select_options = Film.categories.values
-
-    filtering_category = params[:category] || ''
+    category_list = Film.categories.values
+    active_category = params[:category] || ''
 
     @options = {
-      rates: rates,
-      film_select_options: film_select_options,
-      filtering_category: filtering_category
+      rate_params: RateParamsCollector.call(@films, current_user),
+      category_list: category_list,
+      active_category: active_category
     }
   end
 
   def category_condition
     filtering_category = params[:category] || ''
     '.' + params[:category].underscore if filtering_category.present?
-  end
-
-  def collect_rates
-    @films.map do |film|
-      rate = AvarageRateCalc.call(film)
-
-      rated = if user_signed_in?
-        current_user.rated?(film)
-      end.present?
-
-      {"#{film.id}": {rate: rate, rated?: rated}}
-    end.reduce Hash.new, :merge
   end
 
   def film_create_params

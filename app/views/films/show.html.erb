@@ -1,10 +1,6 @@
-<% ValidOptionsChecker.call(@options, %i[rate rated?]) %>
+<% ValidOptionsChecker.call(@options, %i[rate_params]) %>
 <h1>Films#show</h1>
-  <%= render 'films/shared/film', local_options: {
-        film:   @film,
-        rate:   @options[:rate],
-        rated?: @options[:rated?] 
-      } %>
+  <%= render 'films/shared/film', local_options: PartialsDataCollector.call(@film, @options[:rate_params])  %>
 
 <% if can? :manage, @film %>
   <%= link_to 'edit', edit_film_path %>

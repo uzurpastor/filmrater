@@ -1,24 +1,38 @@
 <% ValidOptionsChecker.call(local_options, %i[film rate rated?]) %>
+<div class="row mb-2" data-film_id='<%= local_options[:film].id %>' >
+  <div class="col-12">
+    <div class="row g-0 border rounded overflow-hidden flex-row mb-4 h-250 position-relative">
+      <div class="col p-4 d-flex flex-column position-static">
+        
+        <h3 class="mb-0">
+          <%= local_options[:film].title %>
+        </h3>
+        
+        <div class="mb-1 text-muted">
+          <%= local_options[:film].category.humanize %>
+        </div>
 
-<div class='film' data-film_id='<%= local_options[:film].id %>' 
-  style="<%= 'color:#0f0' if local_options[:rated?] %>" >
+        <strong class="d-inline-block mb-2 text-primary">
+          <%= local_options[:rate] %>
+        </strong>       
+        
 
-  <% if @rate.present? %>
-    <%= render('shared/error_messages', resource: @rate) %>
-  <% end %>
+        <p class="card-text mb-auto">
+          <%= description_text(local_options[:film], action_name) %>
+        </p>
 
-  <%= poster_tag(local_options[:film]) %>
-
-  <%= local_options[:film].inspect %> 
-  <%= local_options[:rate] %>  
-
-  <% unless local_options[:rated?] %>
-    <%= render 'rates/new', local_options: {
-          film: local_options[:film]
-        } %>
-  <% end %>
-
-  <% unless action_name == 'show' %>
-    <%= link_to 'show', film_path(local_options[:film]) %>
-  <% end %>
-</div>  
+        <div class="row inline">
+          <div class="col align-top">
+            <%= show_link(local_options[:film], action_name, class: 'text-uppercase') %>
+          </div>
+          <div class="col">
+            <%= render_rate_form(local_options.slice(:rated?, :film)) %>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <%= poster_tag local_options[:film], class: 'img-thumbnail border-0' %>
+      </div>  
+    </div>
+  </div>
+</div>

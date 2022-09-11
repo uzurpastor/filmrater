@@ -4,22 +4,23 @@
     <div class="col">
       <h1 class="fs-1 text-center align-middle">Catalog</h1>
     </div>
-    <div class="row">
+    <div class="row d-flex">
       <div class="col">
         <%= form_tag films_path, method: :get, class: 'form-floating align-middle' do %>
-          <%= filter_tag @options[:category], class: 'form-select m-2' %>
-          <%= label_tag :category, "Filter by category" %>
-          <%= submit_tag 'filter', class: 'ms-2 w-100 btn btn-outline-primary' %>
+          <div class="input-group d-flex">
+          <%= filter_tag @options[:category], class: 'form-select' %>
+          <%= submit_tag 'filter', class: 'btn btn-outline-primary' %>
+        </div>  
         <% end %> 
       </div>
-      <div class="col d-flex flex-column justify-content-end">
+      <div class="col">
+        <%= paginate @films %>
+      </div>
+      <div class="col">
         <div class="row">
           <% if can? :manage, Film.new %>
-            <%= link_to 'Add film', new_film_path, class: 'col btn btn-primary m-2 fs-2 align-self-stretch' %>
+            <%= link_to 'Add film', new_film_path, class: 'col btn btn-primary align-self-stretch' %>
           <% end %>          
-        </div>
-        <div class="row d-flex">
-          <%= paginate @films %>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 <% ValidOptionsChecker.call(@options, %i[film rate_params]) %>
 
 $('[data-film_id="<%= @options[:film].id %>"]')
-  .html("\
+  .replaceWith("\
     <%=j render 'films/shared/film', \
            local_options: PartialsDataCollector.call(@options[:film], @options[:rate_params]) %>"
   );

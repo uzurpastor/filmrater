@@ -1,9 +1,9 @@
 <% ValidOptionsChecker.call(local_options, %i[film rate rated?]) %>
+
 <div class="row mb-2" data-film_id='<%= local_options[:film].id %>' >
   <div class="col-12">
     <div class="row g-0 border rounded overflow-hidden flex-row mb-4 h-250 position-relative">
-      <div class="col p-4 d-flex flex-column position-static">
-        
+      <div class="col-8 p-4 d-flex flex-column position-static">   
         <h3 class="mb-0">
           <%= local_options[:film].title %>
         </h3>
@@ -17,7 +17,7 @@
         </strong>       
         
 
-        <p class="card-text mb-auto">
+        <p class="card-text mb-2">
           <%= description_text(local_options[:film], action_name) %>
         </p>
 

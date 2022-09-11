@@ -6,7 +6,11 @@ class ApplicationController < ActionController::Base
     @current_ability ||= Ability.new(current_user)
   end
 
-  def safety?
-    SafetyChecker.safety?(current_ability)
+  def safety_film_controller?
+    SafetyChecker.film_controller?(current_ability)
+  end
+
+  def safety_rate_controller?
+    SafetyChecker.rate_controller?(current_ability)
   end
 end

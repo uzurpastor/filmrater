@@ -16,14 +16,14 @@ class FilmsController < ApplicationController
 
   #======= Create Actions =======#
   def new
-    return redirect_to films_path unless safety?
+    return redirect_to films_path unless safety_film_controller?
 
     @film = Film.new
     render 'films/new'
   end
 
   def create
-    return unless safety?
+    return unless safety_film_controller?
 
     @film = Film.new(FilmsParamsPermitter.create(params))
     if @film.save
@@ -36,13 +36,13 @@ class FilmsController < ApplicationController
 
   #======= Update Actions =======#
   def edit
-    return redirect_to films_path unless safety?
+    return redirect_to films_path unless safety_film_controller?
 
     render 'films/edit'
   end
 
   def update
-    return unless safety?
+    return unless safety_film_controller?
 
     if @film.update(FilmsParamsPermitter.update(params))
       redirect_to film_path(@film),
@@ -54,7 +54,7 @@ class FilmsController < ApplicationController
 
   #======= Destroy Action =======#
   def destroy 
-    return unless safety?
+    return unless safety_film_controller?
     
     if @film.destroy
       redirect_to films_path,

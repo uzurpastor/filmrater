@@ -10,7 +10,6 @@ gem 'bootsnap', require: false
 gem 'faker'
 
 gem 'kaminari'
-gem 'bootstrap5-kaminari-views'
 gem 'bootstrap'
 gem 'jquery-rails'
 

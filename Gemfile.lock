@@ -76,9 +76,6 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 2.11.5, < 3)
       sassc-rails (>= 2.0.0)
-    bootstrap5-kaminari-views (0.0.1)
-      kaminari (>= 0.13)
-      rails (>= 3.1)
     builder (3.2.4)
     cancancan (3.4.0)
     concurrent-ruby (1.1.10)
@@ -251,7 +248,6 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   bootstrap
-  bootstrap5-kaminari-views
   cancancan
   debug
   devise

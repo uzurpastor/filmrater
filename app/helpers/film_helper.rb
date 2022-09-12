@@ -1,4 +1,11 @@
 module FilmHelper
+  def film_registrate_password_lable
+    label_tag :password do
+      minimum = "(#{@minimum_password_length} characters minimum)" if @minimum_password_length        
+      'Password ' + minimum.html_safe
+    end
+  end
+
   def form_film_submit(action_name)
     case params[:action] 
     when 'new' 

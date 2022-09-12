@@ -19,7 +19,7 @@ User.create!( email: 'admin@mail.com',
 end
 
 # Films
-30.times do 
+100.times do 
   title = Faker::Movie.title
   description = Faker::Lorem.paragraph sentence_count: 3
   category = Film.categories.keys.sample
@@ -32,7 +32,7 @@ end
 # Rates
 films = Film.all
 users = User.all
-150.times do 
+200.times do 
   film = films.sample 
   user = users.sample
   rate = SecureRandom.random_number(1..10)

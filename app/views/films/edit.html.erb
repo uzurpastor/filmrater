@@ -1,5 +1,11 @@
 <!-- ability for admin -->
 
-<h1>Films#edit</h1>
-
-<%= render 'films/shared/form' %>
+<div class="form-signin w-100 m-auto">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <h1 class="h3 mb-3 fw-normal">Edit: "<%= @film.title %>"</h1>
+      <%= poster_tag @film, class: 'img-thumbnail' %>
+      <%= render 'films/shared/form' %>
+    </div>
+  </div>
+</div>

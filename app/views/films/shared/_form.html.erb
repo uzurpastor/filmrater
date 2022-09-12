@@ -1,31 +1,26 @@
 <%= form_for @film do |f| %>
-  <%= render 'shared/error_messages', resource: @film %>
-  <div class="field">
-    <%= f.label :title, "Title" %>
-    <%= f.text_field :title, maxlength: 30 %>
+  <div class="form-floating">
+    <%= f.text_field :title, maxlength: 30, class: 'form-control m-1'%>
+    <%= f.label :title %>
   </div>
 
-  <div class="field">
+  <div class="form-floating">
+    <%= f.text_area :description, size: '50x10', class: 'form-control m-1 h-50' %>
     <%= f.label :description, "Description" %>
-    <%= f.text_area :description, size: '50x10' %>
   </div>
 
-  <div class="field">
-    <%= f.label :category, "Category" %>
+  <div class="input-group m-1">
+    <%= f.label :category, "Category", class: 'input-group-text' %>          
     <%= f.select :category, 
           options_for_select(Film.categories.values, @film.category || ''), 
-          include_blank: true %>
+          include_blank: true, class: 'form-select' %>
   </div>
-  <div class="field">
-    <%= f.label :poster, "Poster" %>
-    <%= f.file_field :poster %>
+
+  <div class="input-group m-1">
+    <%= f.label :poster, "Poster", class: 'input-group-text' %>
+    <%= f.file_field :poster, class: 'form-control' %>
   </div>
-  
-  <% case params[:action] %>
-  <% when 'new' %>
-    <%= f.submit 'Create' %>
-  <% when 'edit' %>
-    <%= f.submit 'Update' %>
-  <% end %>
+
+  <%= form_film_submit action_name, class: 'btn btn-lg btn-primary m-1 w-100' %>
 
 <% end %>

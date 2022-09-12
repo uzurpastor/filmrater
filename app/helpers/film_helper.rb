@@ -6,13 +6,14 @@ module FilmHelper
     end
   end
 
-  def form_film_submit(action_name)
-    case params[:action] 
+  def form_film_submit(action_name, options = {})
+    submit_text = case params[:action] 
     when 'new' 
-      submit_tag 'Create' 
+      'Create' 
     when 'edit' 
-      submit_tag 'Update' 
+      'Update' 
     end 
+    submit_tag submit_text, options
   end
 
   def description_text(film, action_name)

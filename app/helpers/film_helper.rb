@@ -1,4 +1,13 @@
 module FilmHelper
+  def form_film_submit(action_name)
+    case params[:action] 
+    when 'new' 
+      submit_tag 'Create' 
+    when 'edit' 
+      submit_tag 'Update' 
+    end 
+  end
+
   def description_text(film, action_name)
     if action_name != 'show'    
       film.description.truncate_words(15)

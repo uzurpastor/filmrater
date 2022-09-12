@@ -38,7 +38,7 @@ module FilmHelper
     blob_poster = if film.poster.attached?
       film.poster
     else
-      'no-image-available.jpg'
+      asset_path('no-image-available.jpg')
     end
     image_tag(blob_poster, options)
   end  

@@ -5,17 +5,16 @@
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
         <%= render "shared/error_messages", resource: resource %>
-
         <div class="form-floating">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
-          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'm-1 form-control' %>
+          <%= f.label :email %>
         </div>
         <div class="form-floating">
-          <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
-          <%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "current-password", class: 'm-1 form-control' %>
+          <%= f.label :password %>
         </div>
 
-        <%= f.submit "Sign in", class: 'w-100 btn btn-lg btn-primary' %>
+        <%= f.submit "Sign in", class: 'btn btn-lg btn-primary m-1 w-100' %>
       <% end %>
       <div class="mt-5 mb-3">
         <%= render "shared/links" %>

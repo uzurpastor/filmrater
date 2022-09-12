@@ -1,4 +1,4 @@
-<% ValidOptionsChecker.call(local_options, %i[film rate rated?]) %>
+<% ValidOptionsChecker.call(local_options, %i[film rate can_rate?]) %>
 
 <div class="row mb-2" data-film_id='<%= local_options[:film].id %>' >
   <div class="col-12">
@@ -26,7 +26,7 @@
             <%= show_link(local_options[:film], action_name, class: 'text-uppercase') %>
           </div>
           <div class="col">
-            <%= render_rate_form(local_options.slice(:rated?, :film)) %>
+            <%= render_rate_form(local_options.slice(:can_rate?, :film)) %>
           </div>
         </div>
       </div>

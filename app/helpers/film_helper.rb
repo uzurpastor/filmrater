@@ -31,7 +31,7 @@ module FilmHelper
   end
 
   def render_rate_form(options)
-    unless options[:rated?] 
+    unless options[:can_rate?] 
      render 'rates/new', local_options: {
           film: options[:film]
         }

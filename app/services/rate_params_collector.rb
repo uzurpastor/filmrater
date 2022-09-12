@@ -27,16 +27,16 @@ class RateParamsCollector
   end
 
   def collect(film)
-    {"#{film.id}": {rate: rate(film), rated?: rated?(film)}}
+    {"#{film.id}": {rate: rate(film), can_rate?: can_rate?(film)}}
   end
 
   def rate(film)
     AvarageRateCalc.call(film)
   end
 
-  def rated?(film)
+  def can_rate?(film)
     if @user
-      @user.rated?(film)
+      @user.can_rate?(film)
     end.present?
   end
 end

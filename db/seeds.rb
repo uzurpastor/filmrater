@@ -32,7 +32,7 @@ end
 # Rates
 films = Film.all
 users = User.all
-200.times do 
+700.times do 
   film = films.sample 
   user = users.sample
   rate = SecureRandom.random_number(1..10)

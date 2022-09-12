@@ -12,7 +12,7 @@ class PartialsDataCollector
     {
       film:   @film,
       rate:   rate_params[:rate],
-      rated?: rate_params[:rated?] 
+      can_rate?: rate_params[:can_rate?] 
     } 
   end
 

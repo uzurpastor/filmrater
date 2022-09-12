@@ -10,7 +10,7 @@ class AvarageRateCalc
   end
 
   def call
-    return zero_value unless alredy_rated? 
+    return zero_value unless alredy_can_rate? 
     find_count_of_rates
     find_sum_of_rates
     calc_avarage
@@ -27,7 +27,7 @@ class AvarageRateCalc
     end
   end
   
-  def alredy_rated?
+  def alredy_can_rate?
     @film.rates.size.nonzero?
   end
 

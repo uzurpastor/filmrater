@@ -17,7 +17,10 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'cancancan'
 
-
+group :production do 
+  gem 'pg'
+  gem 'aws-sdk-s3'
+end
 
 group :development, :test do
   gem 'debug', platforms: %i[ mri mingw x64_mingw ]
@@ -25,7 +28,7 @@ group :development, :test do
 end
 
 group :test do 
-  gem 'factory_bot_rails'  
+  gem 'factory_bot_rails', require: false 
   gem 'rspec-rails'
 end
 

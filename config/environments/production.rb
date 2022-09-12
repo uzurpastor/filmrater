@@ -1,4 +1,10 @@
 require "active_support/core_ext/integer/time"
+require "action_mailer/railtie"
+require "active_job/railtie"
+require "action_mailbox/engine"
+require "action_text/engine"
+require "action_cable/engine"
+require "sprockets/railtie"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.

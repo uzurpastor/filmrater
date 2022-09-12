@@ -23,6 +23,7 @@ class FilmSetter
 
   def list
     Film.by_category(@params[:category])
+        .order(id: :desc)
         .page(@params[:page])
         .includes(:rates, :poster_blob)
   end

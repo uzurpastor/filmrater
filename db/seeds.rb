@@ -21,7 +21,7 @@ end
 # Films
 100.times do 
   title = Faker::Movie.title
-  description = Faker::Lorem.paragraph sentence_count: 3
+  description = Faker::Lorem.paragraph sentence_count: 15
   category = Film.categories.keys.sample
 
   Film.create!( title: title,

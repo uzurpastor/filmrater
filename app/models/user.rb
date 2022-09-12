@@ -5,6 +5,6 @@ class User < ApplicationRecord
   has_many :films, through: :rates
 
   def can_rate?(film)
-    self.film_ids.include?(film.id)    
+    self.film_ids.none?(film.id)    
   end
 end

@@ -6,14 +6,8 @@ module FilmHelper
     end
   end
 
-  def form_film_submit(action_name, options = {})
-    submit_text = case params[:action] 
-    when 'new' 
-      'Create' 
-    when 'edit' 
-      'Update' 
-    end 
-    submit_tag submit_text, options
+  def form_film_submit(action, options = {})
+    submit_tag action, options
   end
 
   def description_text(film, action_name)
@@ -31,7 +25,7 @@ module FilmHelper
   end
 
   def render_rate_form(options)
-    unless options[:can_rate?] 
+    if options[:can_rate?] 
      render 'rates/new', local_options: {
           film: options[:film]
         }
